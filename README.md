@@ -15,3 +15,6 @@
 > manifest build
 
 > Now drag and drop generated `dist` folder in browsers extension's page to test.
+
+
+See More [Examples](https://github.com/fxnoob/manifest.js/tree/master/examples)

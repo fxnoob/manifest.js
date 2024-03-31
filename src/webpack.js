@@ -88,21 +88,6 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
 }
 
 const buildWebpack = async (compiler, options) => {
-  if (options.watch) {
-    return new Promise((resolve, reject) => {
-      const watching = compiler.watch({}, (err, stats) => {
-        if (err) {
-          return reject(err.message);
-        }
-        if (stats.hasErrors()) {
-          console.error(stats.compilation.errors);
-          process.exit(0);
-          return reject('Error');
-        }
-        resolve(stats);
-      });
-    });
-  }
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) {
