@@ -2,11 +2,8 @@
 const fs = require('fs');
 const { program } = require('commander');
 const { Builder } = require('./src/builder');
-const pkg = require('./package.json');
 
-program
-  .version(pkg.version)
-  .description('A browser extension builder toolchain');
+program.version('0.0.3').description('A browser extension builder toolchain');
 
 program
   .command('build')
