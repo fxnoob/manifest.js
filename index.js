@@ -3,7 +3,7 @@ const fs = require('fs');
 const { program } = require('commander');
 const { Builder } = require('./src/builder');
 
-program.version('0.0.4').description('A browser extension builder toolchain');
+program.version('0.0.5').description('A browser extension builder toolchain');
 
 program
   .command('build')

@@ -11,6 +11,7 @@ function getFileNameFromPath(filePath) {
 function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
   const currentDir = process.cwd();
   const config = {
+    plugins: [],
     entry: entryPath,
     output: {
       filename: fileName,
@@ -58,7 +59,17 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
     resolve: {
       extensions: ['.mjs', '*', '.js', '.jsx', '.css', '.json'],
     },
-    plugins: [
+  };
+  if (options.watch) {
+    config.watch = true;
+    config.watchOptions = {
+      ignored: /node_modules/,
+      aggregateTimeout: 300, // Delay in milliseconds before rebuilding
+      poll: 1000, // Check for changes every second
+    };
+  }
+  if (options.syncDir) {
+    config.plugins.push(
       new CopyWebpackPlugin({
         patterns: [
           {
@@ -73,16 +84,8 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
             },
           },
         ],
-      }),
-    ],
-  };
-  if (options.watch) {
-    config.watch = true;
-    config.watchOptions = {
-      ignored: /node_modules/,
-      aggregateTimeout: 300, // Delay in milliseconds before rebuilding
-      poll: 1000, // Check for changes every second
-    };
+      })
+    );
   }
   return config;
 }

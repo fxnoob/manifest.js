@@ -127,7 +127,7 @@ class Validator {
       externally_connectable: yup
         .object()
         .shape({
-          matches: yup.array().of(yup.string()).required(),
+          matches: yup.array().of(yup.string()).optional(),
         })
         .notRequired(),
     });
