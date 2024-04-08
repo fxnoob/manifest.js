@@ -5,7 +5,7 @@ const path = require('path');
 const { program } = require('commander');
 const { Builder } = require('./src/builder');
 
-program.version('0.0.6').description('A browser extension builder toolchain');
+program.version('0.0.7').description('A browser extension builder toolchain');
 
 program
   .command('build')

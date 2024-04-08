@@ -55,6 +55,7 @@ class Builder {
       this.backgroundScripts = [this.manifest?.background?.service_worker];
     }
   }
+
   async init() {
     this.manifest = await this.validator.validate(this.manifest);
     this.setContentScripts();

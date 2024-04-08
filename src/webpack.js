@@ -1,12 +1,22 @@
+const fs = require('fs');
+const DotEnv = require('dotenv');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { join } = require('path');
 
 function getFileNameFromPath(filePath) {
   // Split the filePath by directory separator
   const parts = filePath.split(/[\\/]/);
   // Extract the last part which represents the filename
   return parts[parts.length - 1];
+}
+
+function getLocalEnv() {
+  const dotenvPath = join(process.cwd(), './.env');
+  if (fs.existsSync(dotenvPath)) {
+    return DotEnv.config({ path: dotenvPath });
+  }
+  return false;
 }
 
 function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
@@ -95,10 +105,11 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
       })
     );
   }
-  if (options.hasHTML) {
+  const env = getLocalEnv();
+  if (env) {
     config.plugins.push(
-      new HtmlWebpackPlugin({
-        template: './src/index.html', // Use your HTML file as a template
+      new webpack.DefinePlugin({
+        'process.env': JSON.stringify({ ...options, ...env.parsed }),
       })
     );
   }
@@ -112,7 +123,7 @@ const buildWebpack = async (compiler, options) => {
         return reject(err);
       }
       if (stats.hasErrors()) {
-        console.log(stats.compilation.errors);
+        console.error(stats.compilation.errors);
         process.exit(0);
         return reject('Error');
       }
