@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 function getFileNameFromPath(filePath) {
   // Split the filePath by directory separator
@@ -19,6 +20,13 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
     },
     module: {
       rules: [
+        {
+          test: /\.html$/,
+          loader: 'html-loader',
+          options: {
+            minimize: true,
+          },
+        },
         {
           test: /\.(js|jsx)$/,
           use: [
@@ -84,6 +92,13 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
             },
           },
         ],
+      })
+    );
+  }
+  if (options.hasHTML) {
+    config.plugins.push(
+      new HtmlWebpackPlugin({
+        template: './src/index.html', // Use your HTML file as a template
       })
     );
   }
