@@ -3,6 +3,7 @@ const DotEnv = require('dotenv');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { join } = require('path');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 function getFileNameFromPath(filePath) {
   // Split the filePath by directory separator
@@ -22,7 +23,10 @@ function getLocalEnv() {
 function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
   const currentDir = process.cwd();
   const config = {
-    plugins: [],
+    plugins: [
+      // default plugins
+      new NodePolyfillPlugin(),
+    ],
     entry: entryPath,
     output: {
       filename: fileName,
@@ -34,11 +38,11 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
           test: /\.(js|jsx)$/,
           use: [
             {
-              loader: 'source-map-loader',
-            },
-            {
               loader: 'babel-loader',
-              options: { presets: ['@babel/env', '@babel/preset-react'] },
+              options: {
+                presets: ['@babel/preset-env', '@babel/preset-react'],
+                plugins: [['@babel/transform-runtime']],
+              },
             },
           ],
           exclude: /node_modules|\.git/,

@@ -11,10 +11,10 @@
 ### Install package from npm
 > npm install `manifest.js`
 
-### Build browser extension where ever you manifest.json file is
+### Build browser extension where ever your manifest.json file is
 > manifest build
 
 > Now drag and drop generated `dist` folder in browsers extension's page to test.
 
 
-See More [Examples](https://github.com/fxnoob/manifest.js/tree/master/examples)
+See More [Example](https://github.com/fxnoob/image-to-text-ocr)

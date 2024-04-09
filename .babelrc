@@ -25,6 +25,9 @@
     "@babel/plugin-syntax-dynamic-import",
     ["@babel/plugin-transform-react-jsx", {
       "runtime": "automatic"
+    }],
+    ["@babel/transform-runtime", {
+      "regenerator": true
     }]
   ]
 }
