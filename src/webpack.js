@@ -31,13 +31,6 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
     module: {
       rules: [
         {
-          test: /\.html$/,
-          loader: 'html-loader',
-          options: {
-            minimize: true,
-          },
-        },
-        {
           test: /\.(js|jsx)$/,
           use: [
             {
@@ -48,7 +41,7 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
               options: { presets: ['@babel/env', '@babel/preset-react'] },
             },
           ],
-          exclude: /node_modules/,
+          exclude: /node_modules|\.git/,
         },
         {
           test: /\.(css|scss)$/,
@@ -67,10 +60,21 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
             //   },
             // },
           ],
+          exclude: /node_modules|\.git/,
         },
         {
           test: /\.(gif|png|jpe?g|svg)$/i,
-          type: 'asset/resource',
+          use: [
+            'file-loader',
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                bypassOnDebug: true, // webpack@1.x
+                disable: true, // webpack@2.x and newer
+              },
+            },
+          ],
+          exclude: /node_modules|\.git/,
         },
       ],
     },
