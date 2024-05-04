@@ -5,6 +5,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { join } = require('path');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
+const projectRootPath = join(__dirname, '../node_modules');
+
 function getFileNameFromPath(filePath) {
   // Split the filePath by directory separator
   const parts = filePath.split(/[\\/]/);
@@ -21,6 +23,7 @@ function getLocalEnv() {
 }
 
 function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
+  console.log({ projectRootPath });
   const currentDir = process.cwd();
   const config = {
     plugins: [
@@ -38,10 +41,45 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
           test: /\.(js|jsx)$/,
           use: [
             {
-              loader: 'babel-loader',
+              loader: require.resolve('babel-loader', {
+                paths: [projectRootPath],
+              }),
               options: {
-                presets: ['@babel/preset-env', '@babel/preset-react'],
-                plugins: [['@babel/transform-runtime']],
+                presets: [
+                  require.resolve('@babel/preset-env', {
+                    paths: [projectRootPath],
+                  }),
+                  require.resolve('@babel/preset-react', {
+                    paths: [projectRootPath],
+                  }),
+                ],
+                plugins: [
+                  [
+                    require.resolve('@babel/plugin-transform-runtime', {
+                      paths: [projectRootPath],
+                    }),
+                  ],
+                  [
+                    require.resolve('@babel/plugin-proposal-class-properties', {
+                      paths: [projectRootPath],
+                    }),
+                  ],
+                  [
+                    require.resolve('@babel/plugin-syntax-class-properties', {
+                      paths: [projectRootPath],
+                    }),
+                  ],
+                  [
+                    require.resolve('@babel/plugin-syntax-dynamic-import', {
+                      paths: [projectRootPath],
+                    }),
+                  ],
+                  [
+                    require.resolve('@babel/plugin-transform-react-jsx', {
+                      paths: [projectRootPath],
+                    }),
+                  ],
+                ],
               },
             },
           ],
@@ -52,10 +90,14 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
           // in the `src` directory
           use: [
             {
-              loader: 'style-loader',
+              loader: require.resolve('style-loader', {
+                paths: [projectRootPath],
+              }),
             },
             {
-              loader: 'css-loader',
+              loader: require.resolve('css-loader', {
+                paths: [projectRootPath],
+              }),
             },
             // {
             //   loader: 'sass-loader',
@@ -71,7 +113,9 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
           use: [
             'file-loader',
             {
-              loader: 'image-webpack-loader',
+              loader: require.resolve('image-webpack-loader', {
+                paths: [projectRootPath],
+              }),
               options: {
                 bypassOnDebug: true, // webpack@1.x
                 disable: true, // webpack@2.x and newer
