@@ -1,8 +1,11 @@
 {
   "name": "manifest.js",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "release": "bumpp"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -19,6 +22,7 @@
     "manifest": "./index.js"
   },
   "devDependencies": {
+    "bumpp": "^9.4.2",
     "eslint": "^8.57.0",
     "husky": "^9.0.11",
     "prettier": "^3.2.5"
