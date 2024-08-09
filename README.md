@@ -1,20 +1,104 @@
-## Manifest.js
+# manifest.js 
 
-### Build complex browser extensions with only `manifest.json` in place.
+This is a CLI toolchain for building browser extensions. It includes commands for building bundles, managing versions, and translating content. The toolchain is designed to be modular and extendable, making it easy to add new functionality.
 
+## Installation
 
+To use this tool, clone the repository and install the dependencies:
 
+## Usage
 
+```shell
+yarn add manifest.js
+```
+This CLI tool provides several commands to help you manage your browser extension project. Below is a detailed explanation of each command.
 
-## How to use
+### 1. Build Command
 
-### Install package from npm
-> npm install `manifest.js`
+The `build` command compiles your extension’s code into a bundle that can be loaded into the browser.
 
-### Build browser extension where ever your manifest.json file is
-> manifest build
+#### Syntax:
 
-> Now drag and drop generated `dist` folder in browsers extension's page to test.
+```bash
+manifest build [options]
+```
 
+#### Options:
+
+- `--watch`: Run the build process in watch mode. This option automatically rebuilds the bundle whenever a source file changes.
+
+#### Example:
+
+```bash
+manifest build --watch
+```
+
+This command reads the `manifest.json` file from the current working directory, initializes the `Builder` class with it, and triggers the build process.
+
+### 2. Version Command
+
+The `version` command increments the version number in the `manifest.json` file. You can specify the type of version bump: `patch`, `minor`, or `major`.
+
+#### Syntax:
+
+```bash
+manifest version <type>
+```
+
+#### Parameters:
+
+- `<type>`: The type of version increment. Valid values are `patch`, `minor`, or `major`.
+
+#### Example:
+
+```bash
+manifest version patch
+```
+
+This command will increment the patch version (e.g., from `1.0.0` to `1.0.1`) in the `manifest.json` file.
+
+### 3. Translate Command
+
+The `translate` command integrates the translation module into your project. It includes two subcommands: `init` and `sync`.
+
+#### Usage:
+
+```bash
+manifest translate <subcommand>
+```
+
+#### Subcommands:
+
+- `init`: Initializes the translation configuration by generating a `translate.config.json` file.
+- `sync`: Syncs the translations based on the `translate.config.json` file.
+
+#### Example:
+
+```bash
+manifest translate init
+```
+
+This command creates a `translate.config.json` file if it doesn’t already exist.
+
+```bash
+manifest translate sync
+```
+
+This command syncs the translations using the configuration file.
+
+## Extending the CLI
+
+This CLI is built using the `commander` library, making it easy to add new commands or extend existing ones. To add a new command:
+
+1. Create a new module in the `src/` directory.
+2. Import and register your command in the main command file.
+
+## Error Handling
+
+The CLI provides basic error handling. If an error occurs during execution, it will be thrown, and a message will be displayed in the console.
+
+## License
+
+This project is licensed under the MIT License.
 
 See More [Example](https://github.com/fxnoob/image-to-text-ocr)

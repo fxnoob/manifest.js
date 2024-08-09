@@ -23,7 +23,6 @@ function getLocalEnv() {
 }
 
 function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
-  console.log({ projectRootPath });
   const currentDir = process.cwd();
   const config = {
     plugins: [

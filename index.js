@@ -2,10 +2,14 @@
 const fs = require('fs');
 const semver = require('semver');
 const path = require('path');
-const { program } = require('commander');
+const { program, Command } = require('commander');
 const { Builder } = require('./src/builder');
+const translateCommand = require('@fxnoob/translate');
+const pkg = require('./package.json');
 
-program.version('0.0.8').description('A browser extension builder toolchain');
+program
+  .version(pkg.version)
+  .description('A browser extension builder toolchain');
 
 program
   .command('build')
@@ -50,5 +54,7 @@ program
     packageJson.version = newVersion;
     fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
   });
+
+program.addCommand(translateCommand);
 
 program.parse(process.argv);
