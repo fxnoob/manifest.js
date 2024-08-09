@@ -4,13 +4,11 @@ This is a CLI toolchain for building browser extensions. It includes commands fo
 
 ## Installation
 
-To use this tool, clone the repository and install the dependencies:
-
+```shell
+npm install manifest.js -g
+```
 ## Usage
 
-```shell
-yarn add manifest.js
-```
 This CLI tool provides several commands to help you manage your browser extension project. Below is a detailed explanation of each command.
 
 ### 1. Build Command
