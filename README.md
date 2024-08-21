@@ -1,4 +1,4 @@
-# manifest.js 
+# manifest.js
 
 This is a CLI toolchain for building browser extensions. It includes commands for building bundles, managing versions, and translating content. The toolchain is designed to be modular and extendable, making it easy to add new functionality.
 
@@ -7,6 +7,7 @@ This is a CLI toolchain for building browser extensions. It includes commands fo
 ```shell
 npm install manifest.js -g
 ```
+
 ## Usage
 
 This CLI tool provides several commands to help you manage your browser extension project. Below is a detailed explanation of each command.
@@ -83,6 +84,15 @@ manifest translate sync
 ```
 
 This command syncs the translations using the configuration file.
+
+
+### 4. Format Command
+
+#### Usage:
+
+```bash
+manifest format
+```
 
 ## Extending the CLI
 

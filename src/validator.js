@@ -121,7 +121,7 @@ class Validator {
             all_frames: yup.boolean().notRequired(),
             js: yup.array().of(yup.string()).required(),
             run_at: yup.string().notRequired(),
-          })
+          }),
         )
         .notRequired(),
       externally_connectable: yup

@@ -153,7 +153,7 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
             },
           },
         ],
-      })
+      }),
     );
   }
   const env = getLocalEnv();
@@ -161,7 +161,7 @@ function baseWebpackConfig({ fileName, entryPath, outputPath }, options = {}) {
     config.plugins.push(
       new webpack.DefinePlugin({
         'process.env': JSON.stringify({ ...options, ...env.parsed }),
-      })
+      }),
     );
   }
   return config;
@@ -192,11 +192,11 @@ async function buildScripts(csArray, options) {
         entryPath: `./${getFileNameFromPath(filePath)}`,
         outputPath: outputPath + '/dist',
       },
-      options
+      options,
     );
   });
   const promises = baseConfigArray.map((baseConfig) =>
-    buildWebpack(webpack(baseConfig))
+    buildWebpack(webpack(baseConfig)),
   );
   const responses = await Promise.all(promises);
 }
