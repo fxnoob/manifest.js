@@ -16,4 +16,17 @@ module.exports = {
 
   // Indicates whether each individual test should be reported during the run
   verbose: true,
+
+  // Generate JSON report for GitHub Actions
+  reporters: [
+    'default',
+    ['jest-junit', {
+      outputDirectory: './',
+      outputName: 'jest-results.json',
+      classNameTemplate: '{classname}',
+      titleTemplate: '{title}',
+      ancestorSeparator: ' › ',
+      usePathForSuiteName: 'true'
+    }]
+  ],
 };
