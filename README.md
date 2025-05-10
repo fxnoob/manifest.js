@@ -94,6 +94,97 @@ This command syncs the translations using the configuration file.
 manifest format
 ```
 
+## PubSub Library
+
+The package includes a PubSub library for communication between background scripts and content scripts in browser extensions. This library provides an Express-like API for message passing between different contexts.
+
+### Importing the PubSub Library
+
+```javascript
+// Import the singleton instance
+const { pubsub } = require('manifest.js');
+
+// Or import the class to create your own instance
+const { PubSub } = require('manifest.js');
+const myPubSub = new PubSub();
+```
+
+### Basic Usage
+
+#### In a Background Script
+
+```javascript
+// Initialize the pubsub library (automatically detects context)
+pubsub.init();
+
+// Subscribe to a channel
+pubsub.subscribe('greeting', (data, sender) => {
+  console.log(`Received greeting from tab ${sender.tab.id}: ${data.message}`);
+  return { response: 'Hello from background!' };
+});
+
+// Or use the Express-like API
+pubsub.channel('data-request')
+  .use((data, sender) => {
+    console.log(`Received data request from tab ${sender.tab.id}`);
+    return { data: 'Here is your data' };
+  });
+
+// Send a message to a specific tab
+pubsub.publishToTab(tabId, 'notification', { 
+  type: 'info', 
+  message: 'Background process completed' 
+});
+```
+
+#### In a Content Script
+
+```javascript
+// Initialize the pubsub library (automatically detects context)
+pubsub.init();
+
+// Subscribe to a channel
+pubsub.subscribe('notification', (data) => {
+  console.log(`Received notification: ${data.message}`);
+});
+
+// Send a message to the background script
+pubsub.publish('greeting', { message: 'Hello from content script!' })
+  .then(response => {
+    console.log(`Background responded: ${response.response}`);
+  })
+  .catch(error => {
+    console.error('Error sending message:', error);
+  });
+```
+
+### API Reference
+
+#### Methods
+
+- `init()`: Initialize the PubSub system
+- `subscribe(channel, callback)`: Subscribe to a channel
+- `publish(channel, data)`: Publish a message to a channel
+- `publishToTab(tabId, channel, data)`: Send a message to a specific tab
+- `channel(channel)`: Create a middleware-style handler for a specific channel
+
+#### Express-like API
+
+The PubSub library provides an Express-like API for handling messages:
+
+```javascript
+pubsub.channel('user-action')
+  .use((data, sender) => {
+    // First middleware
+    console.log('Processing user action');
+    // No return, continue to next middleware
+  })
+  .use((data, sender) => {
+    // Second middleware
+    return { status: 'success' }; // Return response
+  });
+```
+
 ## Extending the CLI
 
 This CLI is built using the `commander` library, making it easy to add new commands or extend existing ones. To add a new command:
@@ -137,6 +228,16 @@ This project uses Jest for testing. The test suite includes tests for the follow
 - Handling webpack compilation stats errors
 - Applying environment variables from .env file
 - Handling missing .env file
+
+### PubSub Tests
+- Context detection (background vs content script)
+- Initialization of the PubSub system
+- Subscription functionality and unsubscribing
+- Publishing messages and handling responses
+- Publishing to specific tabs
+- Message handling in different contexts
+- Express-like API with middleware-style handlers
+- Error handling and validation
 
 ### Running Tests
 

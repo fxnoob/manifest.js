@@ -6,6 +6,7 @@ const prettier = require('prettier');
 
 const { Builder } = require('./src/builder');
 const translateCommand = require('@fxnoob/translate');
+const { pubsub, PubSub } = require('./src/pubsub');
 const pkg = require('./package.json');
 
 const subProgram = new Command('manifest');
@@ -135,4 +136,9 @@ subProgram
 
 subProgram.addCommand(translateCommand);
 
+// Export the command-line program
 module.exports = subProgram;
+
+// Export the pubsub library
+module.exports.pubsub = pubsub;
+module.exports.PubSub = PubSub;

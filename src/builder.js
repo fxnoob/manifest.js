@@ -25,7 +25,8 @@ class Builder {
       backgroundScripts: [],
       contentScripts: [],
       popupPageScripts: [],
-      optionsPageScripts: []
+      optionsPageScripts: [],
+      pubsubLibrary: ['src/pubsub.js']
     };
 
     this.hasPopupPage = false;
@@ -174,7 +175,8 @@ class Builder {
         ...this.contentScripts,
         ...this.backgroundScripts,
         ...this.scripts.popupPageScripts,
-        ...this.scripts.optionsPageScripts
+        ...this.scripts.optionsPageScripts,
+        ...this.scripts.pubsubLibrary
       ];
       this.setOption(constants.syncDir, true);
       await this.webpack.buildScripts(allScripts, this.options);
