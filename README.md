@@ -105,6 +105,47 @@ This CLI is built using the `commander` library, making it easy to add new comma
 
 The CLI provides basic error handling. If an error occurs during execution, it will be thrown, and a message will be displayed in the console.
 
+## Testing
+
+This project uses Jest for testing. The test suite includes tests for the following components:
+
+### Builder Tests
+- Constructor initialization
+- Setting options
+- Extracting pages from manifest
+- Extracting content scripts from manifest
+- Extracting background scripts from manifest
+- Extracting assets (icons, web accessible resources, HTML pages) from manifest
+- Extracting popup page scripts from manifest
+- Extracting options page scripts from manifest
+- Initializing all properties from manifest
+- Building all scripts
+
+### Validator Tests
+- Validating valid manifests
+- Rejecting invalid manifests
+- Validating manifests with string default_icon
+- Validating minimal manifests without optional fields
+- Validating manifests with all allowed permissions
+- Rejecting manifests with invalid permissions
+- Validating manifests with web_accessible_resources
+- Validating manifests with options_page, devtools_page, and chrome_url_overrides
+
+### Webpack Tests
+- Building scripts successfully
+- Handling webpack compilation errors
+- Handling webpack compilation stats errors
+- Applying environment variables from .env file
+- Handling missing .env file
+
+### Running Tests
+
+To run the tests, use the following command:
+
+```bash
+npm test
+```
+
 ## License
 
 This project is licensed under the MIT License.

@@ -96,15 +96,21 @@ class Validator {
         service_worker: yup.string().notRequired(),
       }),
       action: yup.object().shape({
-        default_icon: yup
-          .object()
-          .shape({
+        default_icon: yup.lazy(value => {
+          if (typeof value === 'string') {
+            return yup.string().notRequired();
+          }
+          return yup.object().shape({
             16: yup.string().notRequired(),
             19: yup.string().notRequired(),
             38: yup.string().notRequired(),
             128: yup.string().notRequired(),
-          })
-          .notRequired(),
+            144: yup.string().notRequired(),
+            48: yup.string().notRequired(),
+          }).notRequired();
+        }),
+        default_title: yup.string().notRequired(),
+        default_popup: yup.string().notRequired(),
       }),
       icons: yup.object().shape({
         16: yup.string().notRequired(),
@@ -128,6 +134,23 @@ class Validator {
         .object()
         .shape({
           matches: yup.array().of(yup.string()).optional(),
+        })
+        .notRequired(),
+      web_accessible_resources: yup
+        .array()
+        .of(
+          yup.object().shape({
+            resources: yup.array().of(yup.string()).required(),
+            matches: yup.array().of(yup.string()).required(),
+          })
+        )
+        .notRequired(),
+      options_page: yup.string().notRequired(),
+      devtools_page: yup.string().notRequired(),
+      chrome_url_overrides: yup
+        .object()
+        .shape({
+          history: yup.string().notRequired(),
         })
         .notRequired(),
     });
