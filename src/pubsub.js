@@ -21,10 +21,10 @@ class PubSub {
   _detectContext() {
     if (typeof chrome !== 'undefined') {
       // In a browser extension environment
-      if (chrome.runtime && chrome.runtime.getManifest) {
-        return 'background';
-      } else if (document && document.body) {
+      if (document && document.body) {
         return 'content';
+      } else if (chrome.runtime && chrome.runtime.getManifest) {
+        return 'background';
       }
     }
     return 'unknown';
@@ -132,9 +132,6 @@ class PubSub {
     // Return unsubscribe function
     return () => {
       this.subscribers[channel] = this.subscribers[channel].filter(cb => cb !== callback);
-      if (this.subscribers[channel].length === 0) {
-        delete this.subscribers[channel];
-      }
     };
   }
 

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="45" failures="0" errors="0" time="0.252">
+  <testsuite name="__tests__/pubsub.test.js" errors="0" failures="0" skipped="0" timestamp="2025-05-10T18:10:52" time="0.137" tests="15">
+    <testcase classname="PubSub › Context Detection" name="should detect background context" time="0">
+    </testcase>
+    <testcase classname="PubSub › Context Detection" name="should detect content context" time="0">
+    </testcase>
+    <testcase classname="PubSub › Initialization" name="should set up message listeners on init" time="0">
+    </testcase>
+    <testcase classname="PubSub › Initialization" name="should not set up listeners if already initialized" time="0.001">
+    </testcase>
+    <testcase classname="PubSub › Subscription" name="should add a subscriber to a channel" time="0">
+    </testcase>
+    <testcase classname="PubSub › Subscription" name="should initialize if not already initialized" time="0.002">
+    </testcase>
+    <testcase classname="PubSub › Subscription" name="should return an unsubscribe function" time="0.001">
+    </testcase>
+    <testcase classname="PubSub › Publishing" name="should send a message through chrome.runtime.sendMessage" time="0">
+    </testcase>
+    <testcase classname="PubSub › Publishing" name="should handle errors in chrome.runtime.sendMessage" time="0.001">
+    </testcase>
+    <testcase classname="PubSub › Publishing to Tab" name="should send a message to a specific tab" time="0">
+    </testcase>
+    <testcase classname="PubSub › Message Handling" name="should handle messages in content script context" time="0.001">
+    </testcase>
+    <testcase classname="PubSub › Message Handling" name="should handle multiple subscribers for the same channel" time="0">
+    </testcase>
+    <testcase classname="PubSub › Express-like API" name="should create a channel router with use method" time="0">
+    </testcase>
+    <testcase classname="PubSub › Express-like API" name="should add handlers via the use method" time="0.001">
+    </testcase>
+    <testcase classname="PubSub › Express-like API" name="should support chaining of use method" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="__tests__/builder.test.js" errors="0" failures="0" skipped="0" timestamp="2025-05-10T18:10:52" time="0.027" tests="15">
+    <testcase classname="Builder › constructor" name="should initialize with default values" time="0.001">
+    </testcase>
+    <testcase classname="Builder › constructor" name="should initialize with provided options" time="0">
+    </testcase>
+    <testcase classname="Builder › setOption" name="should set an option value" time="0">
+    </testcase>
+    <testcase classname="Builder › setPages" name="should extract pages from manifest" time="0">
+    </testcase>
+    <testcase classname="Builder › setContentScripts" name="should extract content scripts from manifest" time="0.001">
+    </testcase>
+    <testcase classname="Builder › setBackgroundScripts" name="should extract background scripts from manifest" time="0">
+    </testcase>
+    <testcase classname="Builder › setAssets" name="should extract main icons from manifest" time="0">
+    </testcase>
+    <testcase classname="Builder › setAssets" name="should extract action icons from manifest" time="0">
+    </testcase>
+    <testcase classname="Builder › setAssets" name="should extract web accessible resources from manifest" time="0">
+    </testcase>
+    <testcase classname="Builder › setAssets" name="should extract HTML pages from manifest" time="0.001">
+    </testcase>
+    <testcase classname="Builder › setPopupPageScripts" name="should extract popup page scripts from manifest" time="0">
+    </testcase>
+    <testcase classname="Builder › setOptionsPageScripts" name="should extract options page scripts from manifest" time="0">
+    </testcase>
+    <testcase classname="Builder › init" name="should initialize all properties from manifest" time="0.002">
+    </testcase>
+    <testcase classname="Builder › build" name="should build all scripts" time="0">
+    </testcase>
+    <testcase classname="Builder › build" name="should handle errors during build" time="0.006">
+    </testcase>
+  </testsuite>
+  <testsuite name="__tests__/validator.test.js" errors="0" failures="0" skipped="0" timestamp="2025-05-10T18:10:52" time="0.038" tests="10">
+    <testcase classname="Validator › validate" name="should validate a valid manifest" time="0.005">
+    </testcase>
+    <testcase classname="Validator › validate" name="should reject an invalid manifest" time="0.007">
+    </testcase>
+    <testcase classname="Validator › validate" name="should validate manifest with string default_icon" time="0.001">
+    </testcase>
+    <testcase classname="Validator › validate" name="should validate manifest without optional fields" time="0.001">
+    </testcase>
+    <testcase classname="Validator › validate" name="should validate manifest with all allowed permissions" time="0.002">
+    </testcase>
+    <testcase classname="Validator › validate" name="should reject manifest with invalid permissions" time="0.001">
+    </testcase>
+    <testcase classname="Validator › validate" name="should validate manifest with web_accessible_resources" time="0.001">
+    </testcase>
+    <testcase classname="Validator › validate" name="should validate manifest with options_page" time="0.001">
+    </testcase>
+    <testcase classname="Validator › validate" name="should validate manifest with devtools_page" time="0.002">
+    </testcase>
+    <testcase classname="Validator › validate" name="should validate manifest with chrome_url_overrides" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="__tests__/webpack.test.js" errors="0" failures="0" skipped="0" timestamp="2025-05-10T18:10:52" time="0.025" tests="5">
+    <testcase classname="webpack › buildScripts" name="should build scripts successfully" time="0.002">
+    </testcase>
+    <testcase classname="webpack › buildScripts" name="should handle webpack compilation errors" time="0.003">
+    </testcase>
+    <testcase classname="webpack › buildScripts" name="should handle webpack compilation stats errors" time="0">
+    </testcase>
+    <testcase classname="webpack › buildScripts" name="should apply environment variables from .env file" time="0">
+    </testcase>
+    <testcase classname="webpack › buildScripts" name="should handle missing .env file" time="0">
+    </testcase>
+  </testsuite>
+</testsuites>
